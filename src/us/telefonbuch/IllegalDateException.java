@@ -1,11 +1,16 @@
+/**
+ * Exception when date is not correct
+ * @author David Hain
+ */
+
 package us.telefonbuch;
 
 public class IllegalDateException extends Exception{
     private int type;
-    public int DAY_ILLEGAL;
-    public int MON_ILLEGAL;
+    public static int DAY_ILLEGAL = 0;
+    public static int MON_ILLEGAL = 1;
 
     public IllegalDateException(int type){
-
+        this.type = type;
     }
 }
