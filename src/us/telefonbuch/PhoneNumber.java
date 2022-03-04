@@ -1,5 +1,7 @@
 /**
- * Saves Phone Number + checks if it is valid
+ * Saves Phone Number in country, areacode and number
+ * can check if Phonenumber isValid
+ * has a toString methode
  *
  * @author Leonhard Stoudek
  */
@@ -20,16 +22,18 @@ public class PhoneNumber {
         number = n;
     }
 
-    PhoneNumber(String number){
-        Pattern pattern = Pattern.compile(" ");
+    PhoneNumber(String number) throws IllegalPhoneNumberException, CloneNotSupportedException{
+        Pattern pattern = Pattern.compile("\\D");
         String[] s = number.split(pattern.pattern());
-        if (s[0].contains("+")){
-            country = Integer.parseInt(s[0].substring(1));
-        } else {
-            country = Integer.parseInt(s[0]);
+        if (isValid(s[0].substring(1), s[1],  s[2])) {
+            if (s[0].contains("+")) {
+                this.country = Integer.parseInt(s[0].substring(1));
+            } else {
+                this.country = Integer.parseInt(s[0]);
+            }
+            this.areacode = Integer.parseInt(s[1]);
+            this.number = Integer.parseInt(s[2]);
         }
-        areacode = Integer.parseInt(s[1]);
-        this.number = Integer.parseInt(s[2]);
     }
 
     public int getAreacode() {
@@ -49,13 +53,15 @@ public class PhoneNumber {
         return "+" + country + " " + areacode + " /" + number;
     }
 
-    public boolean isValid(PhoneNumber phoneNumber) throws IllegalPhoneNumberException{
+    public boolean isValid(String country, String areacode, String number ) throws IllegalPhoneNumberException{
         try {
-            if (country >= 1000) {
+            if (Integer.parseInt(country) >= 1000) {
                 throw new IllegalPhoneNumberException(IllegalPhoneNumberException.COUNTRY_ILLEGAL);
             }
-            if (areacode >= 10000) {
+            if (Integer.parseInt(areacode) >= 10000) {
                 throw new IllegalPhoneNumberException(IllegalPhoneNumberException.AREA_ILLEGAL);
+            }if (Double.parseDouble(number) >= 2147483647){
+                throw new IllegalPhoneNumberException(IllegalPhoneNumberException.NUMBER_ILLEGAL);
             }
 
         }catch (IllegalPhoneNumberException e){
