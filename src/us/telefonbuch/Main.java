@@ -1,11 +1,23 @@
 package us.telefonbuch;
 
-import javax.sound.midi.Soundbank;
+import java.io.*;
+import java.util.ArrayList;
 
 public class Main {
 
-    public static void main(String[] args) throws IllegalDateException{
-        Date d = new Date("2022-02-69");
-        System.out.println(Date.isValid(d));
+    public static void main(String[] args) throws IOException, IllegalPhoneNumberException, CloneNotSupportedException{
+        File f = new File("src/us/telefonbuch/Person.csv");
+        BufferedReader br = new BufferedReader(new FileReader(f));
+        ArrayList<Person> list = new ArrayList<>();
+        StreamOperation so = new StreamOperation();
+        Person p;
+        do{
+            p = so.FromStream(br);
+            if(p != null){
+                list.add(p);
+            }
+        }while(p != null);
+
+
     }
 }
