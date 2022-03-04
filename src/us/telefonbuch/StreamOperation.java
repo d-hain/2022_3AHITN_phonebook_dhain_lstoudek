@@ -20,7 +20,7 @@ public class StreamOperation  {
         }
 
         public Person FromStream(BufferedReader br) throws IOException, IllegalPhoneNumberException, CloneNotSupportedException {
-            String[] s = br.readLine().split(" ");
+            String[] s = br.readLine().split(";");
             String[] s1 = s[3].split("-");
             return new Person(s[0], s[1], s[2], new Date(Integer.parseInt(s[2]), Integer.parseInt(s[1]), Integer.parseInt(s[0])), new PhoneNumber(s[4]+s[5]));
         }
