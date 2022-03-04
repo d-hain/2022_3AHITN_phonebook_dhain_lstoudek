@@ -59,7 +59,7 @@ public class Date{
      *         false ... year is not a leap year
      */
     public boolean isLeapYear(){
-        return (double) (this.year % 4) == 0;
+        return (this.year % 4) == 0;
     }
 
     /**
@@ -80,14 +80,14 @@ public class Date{
             switch(d.getMon()){
                 case 1, 3, 5, 7, 8, 10, 12: // 31 Days
                     if(d.getDay() > 31){
-                        throw new IllegalDateException(0);
+                        throw new IllegalDateException(IllegalDateException.DAY_ILLEGAL);
                     } else{
                         isValid = true;
                     }
                     break;
                 case 4, 6, 9, 11: // 30 Days
                     if(d.getDay() > 30){
-                        throw new IllegalDateException(0);
+                        throw new IllegalDateException(IllegalDateException.DAY_ILLEGAL);
                     } else{
                         isValid = true;
                     }
@@ -95,17 +95,21 @@ public class Date{
                 case 2: // 28 or 29 Days
                     if(d.getDay() < 30){
                         if(d.isLeapYear() && d.getDay() > 29){
-                            throw new IllegalDateException(0);
+                            throw new IllegalDateException(IllegalDateException.DAY_ILLEGAL);
                         } else if(!d.isLeapYear() && d.getDay() > 28){
-                            throw new IllegalDateException(0);
+                            throw new IllegalDateException(IllegalDateException.DAY_ILLEGAL);
                         } else{
                             isValid = true;
                         }
                     } else{
-                        throw new IllegalDateException(0);
+                        throw new IllegalDateException(IllegalDateException.DAY_ILLEGAL);
                     }
                     break;
+                default:
+                    throw new IllegalDateException(IllegalDateException.MON_ILLEGAL);
             }
+        }else{
+            throw new IllegalDateException(IllegalDateException.STRING_FORMAT_ILLEGAL);
         }
 
         return isValid;
