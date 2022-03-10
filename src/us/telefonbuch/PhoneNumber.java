@@ -25,10 +25,10 @@ public class PhoneNumber {
     PhoneNumber(String number) throws IllegalPhoneNumberException, CloneNotSupportedException{
         Pattern pattern = Pattern.compile("\\D");
         String[] s = number.split(pattern.pattern());
-        if (isValid(s[1], s[2],  s[3])) {
-            this.country = Integer.parseInt(s[1]);
-            this.areacode = Integer.parseInt(s[2]);
-            this.number = Integer.parseInt(s[3]);
+        if (isValid(s[0], s[1],  s[2])) {
+            this.country = Integer.parseInt(s[0]);
+            this.areacode = Integer.parseInt(s[1]);
+            this.number = Integer.parseInt(s[2]);
         }
     }
 

@@ -35,12 +35,12 @@ public class StreamOperation{
      */
     public Person FromStream(BufferedReader br) throws IOException, IllegalPhoneNumberException, CloneNotSupportedException{
         String line = br.readLine();
-        if(line.equals("")){
+        if(line == null){
             return null;
         } else{
             String[] s = br.readLine().split(";");
             String[] s1 = s[3].split("-");
-            return new Person(s[0], s[1], s[2], new Date(Integer.parseInt(s[2]), Integer.parseInt(s[1]), Integer.parseInt(s[0])), new PhoneNumber(s[4] + s[5]));
+            return new Person(s[0], s[2], s[1], new Date(s[3]), new PhoneNumber(s[4]));
         }
     }
 }
